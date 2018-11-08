@@ -4,7 +4,7 @@
   "description": "Backend in Node.js which manages next playing songs and pushes information to clients",
   "dedpendencies": {},
   "dependencies": {
-    "express": "^4.15.2",
+    "express": "^4.16.4",
     "socket.io": "^2.1.1"
   },
   "scripts": {
