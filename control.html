@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Disco Screen Control</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box}
+      body { background-color: #1c1c1f; color: #ffffff; margin-top: 20vh; font: 20px "Proxima Nova Bold", Arial}
+      h1 { font-size: 70px; color: #ffffff}
+      h2 { font-size: 35px; color: #b3b3b3}
+      input { font: 20px "Proxima Nova Bold", Arial}
+      button { font: 20px "Proxima Nova Bold", Arial; padding: 5px}
+      #change_box { background-color: #222326; padding: 25px; padding-left: 20vw}
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1 id="now_song">Another One Bites The Dust</h1>
+      <h2 id="now_artist">Queen</h2>
+      <p id="information"></p>
+    </center>
+
+    <br>
+
+    <div id="change_box">
+      <p>Aktueller Song <input id="in_now_song" type="text" name="" value=""></p>
+      <br>
+      <p>Aktueller Interpret <input id="in_now_artist" type="text" name="" value=""></p>
+      <br>
+      <button type="button" name="" onclick="sendnowsong()">Übernehmen</button>
+      <br><br>
+      <p>Information <input id="in_information" type="text" name="" value=""><button style="margin-left: 40px" type="button" name="" onclick="sendinformation()">Übernehmen</button></p>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+
+      var innowsong = document.getElementById('in_now_song');
+      var innowartist = document.getElementById('in_now_artist');
+      var ininformation = document.getElementById('in_information');
+
+      socket.on('now song changed', function(msg){
+        document.getElementById('now_song').innerHTML = msg.song;
+        document.getElementById('now_artist').innerHTML = msg.artist;
+        console.log("Now Song changed to: " + msg.song + " from " + msg.artist);
+      });
+
+      socket.on('information changed', function(msg){
+        document.getElementById('information').innerHTML = msg;
+        console.log("Information changed to: " + msg);
+      });
+
+      function sendnowsong(){
+        var newsong = innowsong.value;
+        var newartist = innowartist.value;
+        socket.emit('change now song', {song: newsong, artist: newartist});
+        innowsong.value = "";
+        innowartist.value = "";
+      }
+
+      function sendinformation(){
+        var information = ininformation.value;
+        socket.emit('change information', information);
+        ininformation.value = "";
+      }
+    </script>
+  </body>
+</html>
