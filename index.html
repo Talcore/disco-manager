@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Disco Screen</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { margin-top: 40vh; font: 13px Helvetica, Arial; }
+    </style>
+  </head>
+  <body>
+    <center><h1 id="next_song">Another one bites the Dust</h1></center>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on('next song changed', function(msg){
+        document.getElementById('next_song').innerHTML = msg;
+        console.log("Next Song changed to: " + msg);
+      });
+    </script>
+  </body>
+</html>

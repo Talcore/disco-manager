@@ -1,0 +1,16 @@
+{
+  "name": "spotify-disco-manage-backend",
+  "version": "0.0.1",
+  "description": "Backend in Node.js which manages next playing songs and pushes information to clients",
+  "dedpendencies": {},
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^2.1.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "main": "server.js",
+  "author": "",
+  "license": "ISC"
+}
