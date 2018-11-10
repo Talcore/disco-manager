@@ -4,14 +4,15 @@
     <title>Disco Screen</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { background-color: #1c1c1f; margin-top: 40vh; font: 20px "Proxima Nova Bold", Arial; }
+      body { background-color: #1c1c1f; margin-top: 10vh; font: 20px "Proxima Nova Bold", Arial; }
       h1 { font-size: 70px; color: #ffffff}
       h2 { font-size: 45px; color: #b3b3b3}
-      #info_box { background-color: #222326; margin-top: 20vh; padding: 25px; color: #ffffff; font-size: 30px}
+      #info_box { background-color: #222326; margin-top: 10vh; padding: 25px; color: #ffffff; font-size: 30px}
     </style>
   </head>
   <body>
     <center>
+      <img id="album_art" src="samplealbum.jpg" width="600px">
       <h1 id="now_song">Another One Bites The Dust</h1>
       <h2 id="now_artist">Queen</h2>
     </center>
@@ -21,6 +22,7 @@
     <script>
       var socket = io();
       socket.on('now song changed', function(msg){
+        document.getElementById('album_art').src = msg.albumart + ".jpg";
         document.getElementById('now_song').innerHTML = msg.song;
         document.getElementById('now_artist').innerHTML = msg.artist;
         console.log("Now Song changed to: " + msg.song + " from " + msg.artist);

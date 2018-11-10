@@ -1,8 +1,9 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var currentsong = {song: "Example Song", artist: "Example Artist"};
+var currentsong = {song: "Example Song", artist: "Example Artist", albumart: "samplealbum"};
 var currentinformation = "Example Information";
 
 app.get('/', function(req, res){
@@ -12,6 +13,8 @@ app.get('/', function(req, res){
 app.get('/control', function(req, res){
   res.sendFile(__dirname + '/control.html');
 });
+
+app.use(express.static('album_arts'));
 
 io.on('connection', function(socket){
   console.log('Screen connected');

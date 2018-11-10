@@ -26,6 +26,8 @@
       <br>
       <p>Aktueller Interpret <input id="in_now_artist" type="text" name="" value=""></p>
       <br>
+      <p>Aktuelles Albumcover <input id="in_now_album_art" type="text" name="" value=""></p>
+      <br>
       <button type="button" name="" onclick="sendnowsong()">Übernehmen</button>
       <br><br>
       <p>Information <input id="in_information" type="text" name="" value=""><button style="margin-left: 40px" type="button" name="" onclick="sendinformation()">Übernehmen</button></p>
@@ -37,6 +39,7 @@
 
       var innowsong = document.getElementById('in_now_song');
       var innowartist = document.getElementById('in_now_artist');
+      var innowalbumart = document.getElementById('in_now_album_art');
       var ininformation = document.getElementById('in_information');
 
       socket.on('now song changed', function(msg){
@@ -53,9 +56,11 @@
       function sendnowsong(){
         var newsong = innowsong.value;
         var newartist = innowartist.value;
-        socket.emit('change now song', {song: newsong, artist: newartist});
+        var newalbumart = innowalbumart.value;
+        socket.emit('change now song', {song: newsong, artist: newartist, albumart: newalbumart});
         innowsong.value = "";
         innowartist.value = "";
+        innowalbumart.value = "";
       }
 
       function sendinformation(){
