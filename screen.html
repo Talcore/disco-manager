@@ -21,6 +21,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io();
+      socket.emit('type', 'Screen');
+
       socket.on('now song changed', function(msg){
         document.getElementById('album_art').src = msg.albumart + ".jpg";
         document.getElementById('now_song').innerHTML = msg.song;

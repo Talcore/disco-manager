@@ -36,6 +36,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io();
+      socket.emit('type', 'Control');
 
       var innowsong = document.getElementById('in_now_song');
       var innowartist = document.getElementById('in_now_artist');

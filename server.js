@@ -17,14 +17,19 @@ app.get('/control', function(req, res){
 app.use(express.static('album_arts'));
 
 io.on('connection', function(socket){
-  console.log('Screen connected');
-
+  console.log('Incoming connection');
+  var type = '';
   //send current screeninfo to new connected screen
   socket.emit('now song changed', currentsong);
   socket.emit('information changed', currentinformation);
 
+  socket.on('type', function(msg){
+    type = msg;
+    console.log(msg + ' connected')
+  });
+
   socket.on('disconnect', function(){
-    console.log('Screen disconnected');
+    console.log(type + ' disconnected');
   });
 
   socket.on('change now song', function(msg){
