@@ -3,7 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var currentsong = {song: "Example Song", artist: "Example Artist", albumart: "samplealbum"};
+var currentsong = {song: "Example Song", artist: "Example Artist", albumart: "image/samplealbum"};
 var currentinformation = "Example Information";
 
 app.get('/', function(req, res){

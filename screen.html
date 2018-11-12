@@ -24,7 +24,7 @@
       socket.emit('type', 'Screen');
 
       socket.on('now song changed', function(msg){
-        document.getElementById('album_art').src = msg.albumart + ".jpg";
+        document.getElementById('album_art').src = msg.albumart.slice(msg.albumart.indexOf('image/') + 6) + ".jpg";
         document.getElementById('now_song').innerHTML = msg.song;
         document.getElementById('now_artist').innerHTML = msg.artist;
         console.log("Now Song changed to: " + msg.song + " from " + msg.artist);
